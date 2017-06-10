@@ -49,8 +49,8 @@ namespace Homework_3_Library.Controllers
         // GET: Rentals/Create
         public IActionResult Create()
         {
-            ViewData["BookID"] = new SelectList(_context.Books, "BookID", "Genre");
-            ViewData["PatronID"] = new SelectList(_context.Patrons, "PatronID", "FirstName");
+            ViewData["BookID"] = new SelectList(_context.Books, "BookID", "BookID");
+            ViewData["PatronID"] = new SelectList(_context.Patrons, "PatronID", "FullName");
             return View();
         }
 

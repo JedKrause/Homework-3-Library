@@ -20,9 +20,46 @@ namespace Homework_3_Library.Controllers
         }
 
         // GET: Patrons
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
-            return View(await _context.Patrons.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["CurrentFilter"] = searchString;
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            var patron = from s in _context.Patrons
+                           select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                patron = patron.Where(s => s.LastName.Contains(searchString)
+                || s.FirstName.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    patron = patron.OrderByDescending(s => s.LastName);
+                    break;
+                case "Date":
+                    patron = patron.OrderBy(s => s.MembershipDate);
+                    break;
+                case "date_desc":
+                    patron = patron.OrderByDescending(s => s.MembershipDate);
+                    break;
+                default:
+                    patron = patron.OrderBy(s => s.LastName);
+                    break;
+            }
+            int pageSize = 5;
+            return View(await PaginatedList<Patron>.CreateAsync(patron.AsNoTracking(), page ?? 1, pageSize));
         }
 
         // GET: Patrons/Details/5
@@ -34,6 +71,9 @@ namespace Homework_3_Library.Controllers
             }
 
             var patron = await _context.Patrons
+                .Include(s => s.Rentals)
+                .ThenInclude(e => e.Book)
+                .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.PatronID == id);
             if (patron == null)
             {

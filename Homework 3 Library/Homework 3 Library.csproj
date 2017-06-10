@@ -7,6 +7,23 @@
   <PropertyGroup>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\New folder\**" />
+    <Content Remove="Migrations\New folder\**" />
+    <EmbeddedResource Remove="Migrations\New folder\**" />
+    <None Remove="Migrations\New folder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20170606164119_LibraryInitial.cs" />
+    <Compile Remove="Migrations\20170606164119_LibraryInitial.Designer.cs" />
+    <Compile Remove="Migrations\LibraryContextModelSnapshot.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Migrations\New folder\LibraryContextModelSnapshot.cs" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />

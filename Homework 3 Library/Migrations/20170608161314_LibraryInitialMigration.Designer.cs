@@ -8,9 +8,10 @@ using Homework_3_Library.Data;
 namespace Homework3Library.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    partial class LibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20170608161314_LibraryInitialMigration")]
+    partial class LibraryInitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -18,8 +19,7 @@ namespace Homework3Library.Migrations
 
             modelBuilder.Entity("Homework_3_Library.Models.Book", b =>
                 {
-                    b.Property<int>("BookID")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("BookID");
 
                     b.Property<string>("Genre")
                         .IsRequired()

@@ -9,6 +9,7 @@ namespace Homework_3_Library.Models
 {
     public class Book
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int BookID { get; set; }
         [StringLength(50)]
         [Required]

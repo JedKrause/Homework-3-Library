@@ -31,10 +31,10 @@
                 @Html.DisplayFor(modelItem => item.DueDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Book.Genre)
+                @Html.DisplayFor(modelItem => item.Book.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Patron.FirstName)
+                @Html.DisplayFor(modelItem => item.Patron.FullName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.RentalID">Edit</a> |

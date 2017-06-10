@@ -1,7 +1,26 @@
-﻿@{
-    ViewData["Title"] = "About";
+﻿@model IEnumerable<Homework_3_Library.Models.ViewModels.RentalCountGroup>
+@{
+    ViewData["Title"] = "Rental Count Statistics";
 }
-<h2>@ViewData["Title"].</h2>
-<h3>@ViewData["Message"]</h3>
-
-<p>Use this area to provide additional information.</p>
+<h2>Rental Count Statistics</h2>
+<table>
+    <tr>
+        <th>
+            Book Id
+        </th>
+        <th>
+            Rentals
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookID)
+            </td>
+            <td>
+                @item.RentalID
+            </td>
+        </tr>
+    }
+</table>

@@ -21,7 +21,12 @@ namespace Homework_3_Library.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",ApplyFormatInEditMode = true)]
         [Display(Name ="Membership Date")]
-        public DateTime MembershipDate { get; set; }   
+        public DateTime MembershipDate { get; set; }
+        public string FullName
+        {
+            get { return LastName + ", " + FirstName; }
+
+        }
 
         public ICollection<Rental> Rentals { get; set; }
     }
